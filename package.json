@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "compose:run": "docker compose up"
+  }
+}
