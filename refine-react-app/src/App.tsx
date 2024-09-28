@@ -21,6 +21,12 @@ import routerBindings, {
   DocumentTitleHandler,
 } from "@refinedev/react-router-v6";
 import { PetsList, PetsCreate, PetsEdit, PetsShow } from "./pages/pets";
+import {
+  BlogPostList,
+  BlogPostCreate,
+  BlogPostEdit,
+  BlogPostShow,
+} from "./pages/blog-posts";
 import { supabaseClient } from "./utility";
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { Header } from "./components/header";
@@ -42,6 +48,16 @@ function App() {
                 routerProvider={routerBindings}
                 notificationProvider={notificationProvider}
                 resources={[
+                  {
+                    name: "blog_posts",
+                    list: "/blog-posts",
+                    create: "/blog-posts/create",
+                    edit: "/blog-posts/edit/:id",
+                    show: "/blog-posts/show/:id",
+                    meta: {
+                      canDelete: true,
+                    },
+                  },
                   {
                     name: "pets",
                     list: "/pets",
@@ -74,6 +90,12 @@ function App() {
                       index
                       element={<NavigateToResource resource="blog_posts" />}
                     />
+                    <Route path="/blog-posts">
+                      <Route index element={<BlogPostList />} />
+                      <Route path="create" element={<BlogPostCreate />} />
+                      <Route path="edit/:id" element={<BlogPostEdit />} />
+                      <Route path="show/:id" element={<BlogPostShow />} />
+                    </Route>
                     <Route path="/pets">
                       <Route index element={<PetsList />} />
                       <Route path="create" element={<PetsCreate />} />
